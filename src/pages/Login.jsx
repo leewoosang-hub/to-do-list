@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-   const idRef = useRef();
+  const idRef = useRef();
   const pwRef = useRef();
   const navigate = useNavigate();
   const [error, setError] = useState("");
@@ -13,7 +13,6 @@ const LoginPage = () => {
     const pw = pwRef.current.value;
 
     if (id === "calie" && pw === "1234") {
-      setError("");
       navigate("/ToDoList");
     } else {
       setError("아이디 또는 비밀번호가 일치하지 않습니다.");
