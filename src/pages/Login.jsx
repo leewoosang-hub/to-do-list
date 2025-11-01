@@ -22,7 +22,6 @@ const LoginPage = () => {
   return (
     <div>
       <h2>로그인</h2>
-      <form onSubmit={handleLogin}>
         <div>
           <input ref={idRef} placeholder="아이디" />
         </div>
@@ -30,8 +29,7 @@ const LoginPage = () => {
           <input ref={pwRef} type="password" placeholder="비밀번호" />
         </div>
         {error && <div>{error}</div>}
-        <button type="submit">로그인</button>
-      </form>
+        <button onClick={handleLogin}>로그인</button>
     </div>
   );
 };
