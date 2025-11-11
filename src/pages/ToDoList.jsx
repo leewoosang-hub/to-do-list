@@ -1,25 +1,26 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 import "../css/ToDoList.css";
 
 const ToDoList = () => {
   const navigate = useNavigate();
   const [toDoList, setToDoList] = useState([]);
   const textRef = useRef();
+  const url = "http://localhost:5000";
 
-  const addList = () => {
-    const newList = textRef.current.value;
-    if (!newList) return; // 空文字を追加しない
-    // 新しい配列を作って更新
-    setToDoList([...toDoList, newList]);
-    textRef.current.value = ""; // 入力欄リセット
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get(`${url}/listOut`);
+      setToDoList(response.data);
+    };
+    fetchData();
+  }, []);
 
-  const deleteList = (index) => {
-    // 指定したindexを除いた新しい配列を作る
-    const updatedList = toDoList.filter((_, i) => i !== index);
-    setToDoList(updatedList);
-  };
+  const addList = () => {};
+
+  const handleDelete = (id) => {};
 
   const logOut = () => {
     if (confirm("sure?") == true) {
@@ -36,18 +37,22 @@ const ToDoList = () => {
       <h2>To Do List Page</h2>
       <input ref={textRef} placeholder="insert your memo" />
       <button onClick={addList}>Click</button>
-      {toDoList.length > 0 ? (
-        <div>
-          {toDoList.map((list, index) => (
-            <div className="list" key={index}>
-              {list}
-              <button onClick={() => deleteList(index)}>DELTE</button>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div>No List</div>
-      )}
+      <table>
+        <tbody>
+          {toDoList.map((memo, i) => {
+            return (
+              <tr key={i}>
+                <td>{memo.memo_content}</td>
+                <td>
+                  <button onClick={() => handleDelete(memo.memo_id)}>
+                    削除
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   ); //return
 }; //ToDoList
