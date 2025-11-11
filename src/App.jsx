@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/Login";
 import ToDoList from "./pages/ToDoList";
@@ -8,8 +8,8 @@ function App() {
     <div id="root">
       <Router>
         <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/ToDoList" element={<ToDoList />} />
+          <Route path="/" Component={LoginPage} />
+          <Route path="/ToDoList" Component={ToDoList}/> 
         </Routes>
       </Router>
     </div>

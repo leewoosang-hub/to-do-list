@@ -27,7 +27,7 @@ const ToDoList = () => {
       navigate("/");
       document.removefrm.submit();
     } else {
-      return false;
+      return;
     }
   };
 
